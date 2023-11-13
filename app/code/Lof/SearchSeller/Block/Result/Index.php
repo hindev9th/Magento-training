@@ -42,23 +42,30 @@ class Index extends \Magento\Framework\View\Element\Template
     {
         $seller = $this->sellerModel->getCollection();
 
-        $page = $this->getRequest()->getParam('p') ?? 0;
+        $page = $this->getRequest()->getParam('p') ?? 1;
         $limit = $this->getRequest()->getParam('limit') ?? 8;
         $orderBy = $this->getRequest()->getParam('order_by') ?? 'name';
         $orderType = $this->getRequest()->getParam('order_type') ?? 'ASC';
         $searchKey = $this->getRequest()->getParam('q') ?? null;
+        $countryId = $this->getRequest()->getParam('country') ?? null;
+        $city = $this->getRequest()->getParam('ct') ?? null;
+        $postcode = $this->getRequest()->getParam('pc') ?? null;
+
+        if ($countryId) {
+            $seller->addFieldToFilter('country_id', $countryId);
+        }
 
         if ($searchKey) {
             $seller->addFieldToFilter(
-                ['name','address', 'url_key', 'region', 'country_id', 'city', 'postcode'],
+                ['name','address', 'url_key', 'region','city','postcode'],
                 [
                     ['like' => "%$searchKey%"],
                     ['like' => "%$searchKey%"],
                     ['like' => "%$searchKey%"],
                     ['like' => "%$searchKey%"],
-                    ['like' => "%$searchKey%"],
-                    ['like' => "%$searchKey%"],
-                    ['like' => "%$searchKey%"],
+
+                    ['like' => "%$city%"],
+                    ['like' => "%$postcode%"],
                 ]
             );
         }
@@ -68,7 +75,6 @@ class Index extends \Magento\Framework\View\Element\Template
         $seller->setCurPage($page);
         return $seller;
     }
-
 
     /**
      * @param mixed|string $social
