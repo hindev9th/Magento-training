@@ -1,0 +1,41 @@
+<?php
+    /** @var \Lof\CustomerOrderRefund\Block\Refund\Index $block */
+    $orderRefunds = $block->getOrderRefunds();
+    $orders = $orderRefunds->getData();
+?>
+<?php if ($orders && count($orders)) : ?>
+    <div class="table-wrapper orders-history">
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Orders')) ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?= $block->escapeHtml(__('Order #')) ?></th>
+                <th scope="col" class="col date"><?= $block->escapeHtml(__('Date')) ?></th>
+                <?= $block->getChildHtml('extra.column.header') ?>
+                <th scope="col" class="col total"><?= $block->escapeHtml(__('Order Total')) ?></th>
+                <th scope="col" class="col status"><?= $block->escapeHtml(__('Status')) ?></th>
+                <th scope="col" class="col actions"><?= $block->escapeHtml(__('Action')) ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($orders as $order) : ?>
+                <tr>
+                    <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><?= $block->escapeHtml($order['order_id']) ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><?= /* @noEscape */ $block->formatDate($order['created_at']) ?></td>
+                    <?php $extra = $block->getChildBlock('extra.container'); ?>
+                    <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="col total"><?= /* @noEscape */ $block->formatPriceCurrency($order['grand_total'])  ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Status')) ?>" class="col status"><?= $block->escapeHtml($order['status']) ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                        <a href="<?= $block->escapeUrl($block->getViewUrl($order)) ?>" class="action view">
+                            <span><?= $block->escapeHtml(__('View Order')) ?></span>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+<?php else : ?>
+    <div class="message info empty"><span><?= __('You have placed no orders.') ?></span></div>
+
+<?php endif ?>

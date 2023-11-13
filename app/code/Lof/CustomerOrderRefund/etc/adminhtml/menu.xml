@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Lof_CustomerOrderRefund::lof_customer_refund_order"
+             title="Customer order refund"
+             module="Lof_CustomerOrderRefund"
+             sortOrder="6"
+             resource="Magento_Backend::content"
+             parent="Lof_All::license"
+             action="lof_customerorderrefund"/>
+	</menu>
+</config>

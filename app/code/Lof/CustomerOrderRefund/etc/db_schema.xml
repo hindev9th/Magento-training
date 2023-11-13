@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="lof_customer_refund_order" resource="default" engine="innodb" comment="lof_customer_refund_order Table">
+		<column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+		<constraint xsi:type="primary" referenceId="PRIMARY">
+			<column name="entity_id"/>
+		</constraint>
+		<column name="order_id" nullable="true" xsi:type="int" comment="order_id" identity="false"/>
+		<column name="customer_id" nullable="true" xsi:type="int" comment="customer_id" identity="false"/>
+		<column name="created_at" nullable="false" default="CURRENT_TIMESTAMP" xsi:type="timestamp" comment="created_at"/>
+		<column name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" xsi:type="timestamp" comment="updated_at"/>
+	</table>
+</schema>

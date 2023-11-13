@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Lof\CustomerOrderRefund\Api\LofCustomerRefundOrderRepositoryInterface" type="Lof\CustomerOrderRefund\Model\LofCustomerRefundOrderRepository"/>
+	<preference for="Lof\CustomerOrderRefund\Api\Data\LofCustomerRefundOrderInterface" type="Lof\CustomerOrderRefund\Model\LofCustomerRefundOrder"/>
+	<preference for="Lof\CustomerOrderRefund\Api\Data\LofCustomerRefundOrderSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <preference for="Magento\Sales\Block\Order\History" type="Lof\CustomerOrderRefund\Block\Order\History" />
+	<virtualType name="Lof\CustomerOrderRefund\Model\ResourceModel\LofCustomerRefundOrder\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">lof_customer_refund_order</argument>
+			<argument name="resourceModel" xsi:type="string">Lof\CustomerOrderRefund\Model\ResourceModel\LofCustomerRefundOrder\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="lof_customer_refund_order_listing_data_source" xsi:type="string">Lof\CustomerOrderRefund\Model\ResourceModel\LofCustomerRefundOrder\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
